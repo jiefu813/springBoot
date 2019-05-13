@@ -5,12 +5,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.jeff.entity.User;
 
 @Mapper
+@CacheConfig(cacheNames = "baseCache")
 public interface UserMapper {
 
+	@Cacheable
 	@Select("select id,login_name loginName,nick_name nickName,name,birthday from user where id=#{id}")
 	User getUserById(@Param("id") Long id);
 
