@@ -10,4 +10,6 @@ public interface UserService {
 
 	List<User> getUserList();
 
+	int updateUser(Long id, String name);
+
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,11 +16,13 @@ import com.jeff.service.UserService;
 
 @RestController
 public class UserController {
-	
+
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CacheManager cacheManager;
 
 	@RequestMapping("getUserById")
 	public User getUserById(Long id) {
@@ -33,7 +37,14 @@ public class UserController {
 		PageInfo<User> page = new PageInfo<>(userList);
 		return page;
 	}
-	
+
+	@RequestMapping("updateUser")
+	public int updateUser(Long id, String name) {
+		Cache cache = cacheManager.getCache("baseCache");
+		cache.clear();
+		return userService.updateUser(id, name);
+	}
+
 	@RequestMapping("log")
 	public String log() {
 		logger.info("测试基本信息");

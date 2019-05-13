@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -20,5 +21,8 @@ public interface UserMapper {
 
 	@Select("select id,login_name loginName,nick_name nickName,name,birthday from user")
 	List<User> getUserList();
+
+	@Update("update user set name=#{name} where id=#{id}")
+	int updateUser(@Param("id") Long id, @Param("name") String name);
 
 }

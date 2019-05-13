@@ -22,8 +22,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUserList() {
-		
+
 		return userMapper.getUserList();
+	}
+
+	@Override
+	public int updateUser(Long id, String name) {
+
+		return userMapper.updateUser(id, name);
 	}
 
 }
