@@ -8,7 +8,7 @@ spring:
     suffix: .ftl
     template-loader-path: classpath:/templates/
   datasource:
-    url: jdbc:mysql://localhost:3306/ssm
+    url: jdbc:mysql://localhost:3306/jeff
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
